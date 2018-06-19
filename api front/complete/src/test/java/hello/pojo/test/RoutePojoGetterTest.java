@@ -1,4 +1,4 @@
-package com.example.aeroperu.pojos.test;
+package hello.pojo.test;
 
 import static org.junit.Assert.assertTrue;
 
@@ -10,7 +10,8 @@ import com.esq.models.City;
 import com.esq.models.Country;
 import com.esq.models.Route;
 import com.esq.models.State;
-import com.example.aeroperu.pojo.RoutePojoGetter;
+
+import hello.pojo.RoutePojoGetter;
 
 public class RoutePojoGetterTest {
 

@@ -1,4 +1,4 @@
-package com.example.aeroperu.pojos.test;
+package hello.pojo.test;
 
 import static org.junit.Assert.assertTrue;
 
@@ -12,7 +12,8 @@ import com.esq.models.Country;
 import com.esq.models.Offer;
 import com.esq.models.Route;
 import com.esq.models.State;
-import com.example.aeroperu.pojo.OfferPojoGetter;
+
+import hello.pojo.OfferPojoGetter;
 
 public class OfferPojoGetterTest {
 

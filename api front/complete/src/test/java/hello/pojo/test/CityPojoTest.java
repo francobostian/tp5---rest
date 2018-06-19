@@ -1,4 +1,4 @@
-package com.example.aeroperu.pojos.test;
+package hello.pojo.test;
 
 import static org.junit.Assert.assertEquals;
 
@@ -8,7 +8,8 @@ import org.junit.Test;
 import com.esq.models.City;
 import com.esq.models.Country;
 import com.esq.models.State;
-import com.example.aeroperu.pojo.CityPojo;
+
+import hello.pojo.CityPojo;
 
 public class CityPojoTest {
 
