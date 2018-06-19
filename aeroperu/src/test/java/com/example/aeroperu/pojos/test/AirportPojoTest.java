@@ -24,7 +24,7 @@ public class AirportPojoTest {
 	State state = new State(1, "Buenos Aires", "BA", country);
 	City city = new City(1, "Buenos Aires", "CABA", state);
 	CityPojo cityPojo = new CityPojo(city);
-	Airport air = new Airport(1, "Jorge Newbery", "AEP", city, (float) 23.14, (float) 108.11);
+	Airport air = new Airport(1, "Jorge Newbery", "AEP", city, 432, 567);
 	this.airport = new AirportPojo(air);
 
 	this.otherAirport = null;

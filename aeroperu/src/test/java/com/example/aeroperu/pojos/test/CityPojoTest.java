@@ -19,7 +19,8 @@ public class CityPojoTest {
     public void setUp() {
 
 	Country country = new Country(1, "Argentina", "ARG");
-	State state = new State(1, "Buenos Aires", "BA", country);
+	State state = new State(1, "Buenos Aires", "BUE", country);
+
 	this.city = new CityPojo(new City(1, "Mar del Plata", "7600", state));
 	this.otherCity = new CityPojo();
     }
