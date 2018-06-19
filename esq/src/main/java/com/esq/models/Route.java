@@ -11,6 +11,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -26,17 +30,23 @@ public class Route {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
+    // @JsonInclude(Include.NON_NULL)
+    @JsonProperty(access = Access.WRITE_ONLY)
+
     private long id;
 
     @JoinColumn(name = "origen_id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonInclude(Include.NON_NULL)
     private Airport airportBegin;
-
+    // , cascade = CascadeType.DETACH)
     @JoinColumn(name = "destino_id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonInclude(Include.NON_NULL)
     private Airport airportEnd;
 
     @Column(name = "distancia", nullable = false)
+    // @JsonIgnore
     private int distance;
 
     public Route(long id, Airport airportBegin, Airport airportEnd, int distance) {
@@ -47,7 +57,7 @@ public class Route {
 
     }
 
-    public Route(Airport airportBegin, Airport airportEnd, int distance, int estimatedTime) {
+    public Route(Airport airportBegin, Airport airportEnd, int distance) {
 	this.airportBegin = airportBegin;
 	this.airportEnd = airportEnd;
 	this.distance = distance;

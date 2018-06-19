@@ -49,7 +49,7 @@ public class OfferTest extends TestCase {
     public void testToStringOK() {
 	String value = this.offer.toString();
 	assertEquals("Checking toString", value,
-		"Jorge Newbery (AEP) - Buenos Aires (CABA) - Buenos Aires (BA) - Argentina (ARG) to Ezeiza International Airport (EZE) - Buenos Aires (CABA) - Buenos Aires (BA) - Argentina (ARG) - Cabin: Business - Offer will be from: 2018/05/29 to: 2018/05/29 the price is: 200");
+		"Jorge Newbery (AEP) - Buenos Aires (CABA) - Buenos Aires (BA) - Argentina (ARG) to Ezeiza International Airport (EZE) - Buenos Aires (CABA) - Buenos Aires (BA) - Argentina (ARG) - Cabin: Business - Offer will be from: 2018/06/08 to: 2018/06/08 the price is: 200");
 
     }
 
@@ -59,7 +59,7 @@ public class OfferTest extends TestCase {
 	String value = this.offer.toString();
 
 	assertEquals("Checking toString", value,
-		"Jorge Newbery (AEP) - Buenos Aires (CABA) - Buenos Aires (BA) - Argentina (ARG) to Ezeiza International Airport (EZE) - Buenos Aires (CABA) - Buenos Aires (BA) - Argentina (ARG) - Cabin: null - Offer will be from: 2018/05/29 to: 2018/05/29 the price is: 200");
+		"Jorge Newbery (AEP) - Buenos Aires (CABA) - Buenos Aires (BA) - Argentina (ARG) to Ezeiza International Airport (EZE) - Buenos Aires (CABA) - Buenos Aires (BA) - Argentina (ARG) - Cabin: null - Offer will be from: 2018/06/08 to: 2018/06/08 the price is: 200");
     }
 
     @Test

@@ -10,6 +10,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,13 +23,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@JsonIgnoreProperties(ignoreUnknown = true)
-
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Airport {
 
     @Id
     @GeneratedValue
-
+    @JsonProperty(access = Access.WRITE_ONLY)
     @Column(name = "id", nullable = false)
     private long id;
 
@@ -37,11 +40,15 @@ public class Airport {
 
     @JoinColumn(name = "id_ciudad")
     @ManyToOne(fetch = FetchType.LAZY)
+    // @JsonIgnore
+    @JsonInclude(Include.NON_NULL)
     private City city;
-
+    @JsonInclude(Include.NON_NULL)
+    // @JsonProperty(access = Access.WRITE_ONLY)
     @Column(name = "langitud", nullable = false)
     private float latitude;
-
+    @JsonInclude(Include.NON_NULL)
+    // @JsonProperty(access = Access.WRITE_ONLY)
     @Column(name = "latitud", nullable = false)
     private float longitude;
 

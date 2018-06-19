@@ -1,5 +1,6 @@
 package com.esq.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +11,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -26,10 +31,15 @@ public class Offer {
     @Id
     @GeneratedValue
     @Column(name = "id", nullable = false)
+    // @JsonInclude(Include.NON_NULL)
+    @JsonProperty(access = Access.WRITE_ONLY)
+
     private long id;
 
     @JoinColumn(name = "ruta")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonInclude(Include.NON_EMPTY)
+    // @JsonProperty(access = Access.WRITE_ONLY)
     private Route route;
 
     @Column(name = "desde", nullable = false)
@@ -38,7 +48,7 @@ public class Offer {
     @Column(name = "hasta", nullable = false)
     private String until;
 
-    @JoinColumn(name = "id_cabina_x_nombre")
+    @JoinColumn(name = "id_cabina")
     @ManyToOne(fetch = FetchType.LAZY)
     private Cabin cabin;
 

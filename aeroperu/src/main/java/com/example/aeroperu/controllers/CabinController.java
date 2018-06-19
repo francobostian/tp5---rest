@@ -1,11 +1,12 @@
 package com.example.aeroperu.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,68 +18,80 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.esq.models.Cabin;
-import com.example.aeroperu.repo.CabinRepo;
+import com.example.aeroperu.pojo.CabinPojo;
+import com.example.aeroperu.service.CabinService;
 
 @RestController
 @RequestMapping(value = "/cabin", produces = "Application/Json")
 public class CabinController {
 
     @Autowired
-    CabinRepo cabinDAO;
+    CabinService cabinService;
 
     /* to save a cabin */
-    @PostMapping("/post")
-    public Cabin createCabin(@Valid @RequestBody Cabin air) {
-	return cabinDAO.save(air);
+    @PostMapping("/")
+    public Cabin createCabin(@Valid @RequestBody Cabin cabin) {
+	return cabinService.newObject(cabin);
     }
 
     /* get all cabins */
-    @GetMapping("/get")
-    public List<Cabin> getAllCabins() {
-	return (List<Cabin>) cabinDAO.findAll();
+    @GetMapping("/")
+    public List<CabinPojo> getAllCabins() {
+	List<Cabin> cabins = (List<Cabin>) cabinService.getAll();
+
+	ResponseEntity status = new ResponseEntity(HttpStatus.NO_CONTENT);
+
+	List<CabinPojo> pojos = new ArrayList<CabinPojo>();
+
+	for (Cabin c : cabins) {
+	    pojos.add(new CabinPojo(c));
+	}
+
+	return pojos;
     }
 
     /* get Cabin by id */
-    @GetMapping("/get/{id}")
-    public ResponseEntity<Optional<Cabin>> getCabinById(@PathVariable(value = "id") Long airid) {
+    @GetMapping("/{id}")
+    public ResponseEntity<CabinPojo> getCabinBy(@PathVariable(value = "id") Long airid) {
+	ResponseEntity status = new ResponseEntity(HttpStatus.NO_CONTENT);
+	Cabin cabin = cabinService.getById(airid);
 
-	Optional<Cabin> air = cabinDAO.findById(airid);
-
-	if (air == null) {
+	if (cabin == null) {
 	    return ResponseEntity.notFound().build();
 	}
-	return ResponseEntity.ok().body(air);
 
+	CabinPojo pojo = new CabinPojo(cabin);
+
+	return new ResponseEntity<CabinPojo>(pojo, HttpStatus.OK);
     }
 
-    @PutMapping("/put/{id}")
+    /* Modify Cabin */
+    @PutMapping("/{id}")
     public ResponseEntity<Cabin> updateCabin(@PathVariable(value = "id") Long airid,
 	    @Valid @RequestBody Cabin airDetails) {
 
-	Optional<Cabin> air = cabinDAO.findById(airid);
-	Cabin cabina = air.get();
+	Cabin cabin = cabinService.getById(airid);
 
-	if (cabina == null) {
+	if (cabin == null) {
 	    return ResponseEntity.notFound().build();
 	}
 
-	// Cabin port = new Cabin();
-	cabina.setName(airDetails.getName());
+	cabin.setName(airDetails.getName());
 
-	Cabin updateCabin = cabinDAO.save(cabina);
+	Cabin updateCabin = cabinService.newObject(cabin);
 	return ResponseEntity.ok().body(updateCabin);
 
     }
 
     /* Delete a Cabin */
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Cabin> deleteCabin(@PathVariable(value = "id") Long airid) {
 
-	Optional<Cabin> air = cabinDAO.findById(airid);
+	Cabin air = cabinService.getById(airid);
 	if (air == null) {
 	    return ResponseEntity.notFound().build();
 	}
-	cabinDAO.deleteById(airid);
+	cabinService.removeObject(airid);
 
 	return ResponseEntity.ok().build();
 

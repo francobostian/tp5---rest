@@ -10,6 +10,8 @@ import javax.persistence.Table;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,6 +27,9 @@ public class Cabin {
 
     @Id
     @GeneratedValue
+    // @JsonInclude(Include.NON_NULL)
+    @JsonProperty(access = Access.WRITE_ONLY)
+
     @Column(name = "id", nullable = false)
 
     private long id;

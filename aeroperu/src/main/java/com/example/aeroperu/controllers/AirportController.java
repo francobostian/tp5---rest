@@ -1,11 +1,12 @@
 package com.example.aeroperu.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,92 +18,110 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.esq.models.Airport;
-import com.example.aeroperu.repo.AirportRepo;
+import com.esq.models.City;
+import com.example.aeroperu.pojo.AirportPojo;
+import com.example.aeroperu.service.AirportService;
+import com.example.aeroperu.service.CityService;
 
 @RestController
-@RequestMapping(value = "/air", produces = "Application/Json")
+@RequestMapping(value = "/airport", produces = "Application/Json")
 public class AirportController {
+    @Autowired
+    AirportService airportService;
 
     @Autowired
-    AirportRepo airportDAO;
+    CityService cityService;
 
     /* to save an port */
-    @PostMapping("/port")
-    public Airport createAirport(@Valid @RequestBody Airport air) {
-	return airportDAO.save(air);
+    @PostMapping("/")
+    public Airport createAirport(@Valid @RequestBody Airport airport) {
+
+	String iataCode = airport.getIataCode();
+	String[] code = iataCode.split("-");
+
+	City city = this.cityService.getByAttributeType(code[0]);
+
+	airport.setCity(city);
+	airport.setIataCode(code[1]);
+	return airportService.newObject(airport);
     }
 
-    /* get all port */
-    @GetMapping("/port")
-    public List<Airport> getAllAirports() {
-	return (List<Airport>) airportDAO.findAll();
+    /* get all airports */
+    @GetMapping("/")
+    public ResponseEntity<List<AirportPojo>> getAllAirports() {
+	List<Airport> airportList = (List<Airport>) airportService.findAll();
+
+	List<AirportPojo> pojos = new ArrayList<AirportPojo>();
+
+	for (Airport a : airportList) {
+	    pojos.add(new AirportPojo(a));
+	}
+
+	return new ResponseEntity<List<AirportPojo>>(pojos, HttpStatus.OK);
     }
 
     /* get airport by airid */
-    @GetMapping("/port/{id}")
-    public ResponseEntity<Optional<Airport>> getAirportById(@PathVariable(value = "id") Long airid) {
-
-	Optional<Airport> air = airportDAO.findById(airid);
-
-	if (air == null) {
+    @GetMapping("/{id}")
+    public ResponseEntity<AirportPojo> getAirportById(@PathVariable(value = "id") String iata) {
+	ResponseEntity status = new ResponseEntity(HttpStatus.NO_CONTENT);
+	Airport airport = airportService.getByAttributeType(iata);
+	AirportPojo pojo = new AirportPojo(airport);
+	if (airport == null) {
 	    return ResponseEntity.notFound().build();
 	}
-	return ResponseEntity.ok().body(air);
+	System.err.println(airport.getId());
+
+	status = new ResponseEntity<AirportPojo>(pojo, HttpStatus.OK);
+	return status;
 
     }
 
-    /* update an airport by airid */
-    // @PutMapping("/port/{id}")
-    //
-    // public ResponseEntity updateCustomer(@PathVariable Long id, @RequestBody
-    // Airport air) {
-    //
-    // Optional<Airport> air = airportDAO.findById(id);
-    //
-    // air = null; // airportDAO.existsById(id);
-    //
-    // if (null == air) {
-    // return new ResponseEntity("No Customer found for ID " + id,
-    // HttpStatus.NOT_FOUND);
-    // }
-    //
-    // return new ResponseEntity(air, HttpStatus.OK);
-    //
-    // }
-    @PutMapping("/port/{id}")
-    public ResponseEntity<Airport> updateAirport(@PathVariable(value = "id") Long airid,
+    @PutMapping("/{id}")
+    public ResponseEntity<Airport> updateAirport(@PathVariable(value = "id") Long id,
 	    @Valid @RequestBody Airport airDetails) {
+	ResponseEntity status = new ResponseEntity(HttpStatus.NO_CONTENT);
+	Airport air = airportService.getById(id);
 
-	Optional<Airport> air = airportDAO.findById(airid);
 	if (air == null) {
 	    return ResponseEntity.notFound().build();
 	}
 
-	Airport port = new Airport();
-	port.setId(airid);
-	port.setIataCode(airDetails.getIataCode());
-	port.setName(airDetails.getName());
-	port.setLatitude(airDetails.getLatitude());
-	port.setLongitude(airDetails.getLongitude());
-	port.setCity(airDetails.getCity());
+	String iataCode = airDetails.getIataCode();
+	System.out.println(iataCode);
+	String[] code = iataCode.split("-");
+	System.out.println(code[0]);
+	System.out.println(code[1]);
 
-	Airport updateAirport = airportDAO.save(port);
-	return ResponseEntity.ok().body(updateAirport);
-	// return ResponseEntity.badRequest().build();
+	City city = this.cityService.getByAttributeType(code[0]);
+
+	Airport airport = new Airport();
+	airport.setId(id);
+	airport.setIataCode(code[1]);
+	airport.setName(airDetails.getName());
+	airport.setLatitude(airDetails.getLatitude());
+	airport.setLongitude(airDetails.getLongitude());
+	airport.setCity(city);
+
+	Airport updateAirport = airportService.newObject(airport);
+	status = new ResponseEntity<Airport>(updateAirport, HttpStatus.OK);
+	return status;
 
     }
 
     /* Delete an airport */
-    @DeleteMapping("/port/{id}")
-    public ResponseEntity<Airport> deleteAirport(@PathVariable(value = "id") Long airid) {
-
-	Optional<Airport> air = airportDAO.findById(airid);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Airport> deleteAirport(@PathVariable(value = "id") Long id) {
+	ResponseEntity status = new ResponseEntity(HttpStatus.NO_CONTENT);
+	Airport air = airportService.getById(id);
 	if (air == null) {
 	    return ResponseEntity.notFound().build();
 	}
-	airportDAO.deleteById(airid);
-
-	return ResponseEntity.ok().build();
+	airportService.removeObject(id);
+	status = new ResponseEntity(HttpStatus.OK);
+	return status;
 
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////
+
 }
