@@ -16,11 +16,13 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Table(name = "ruta")
+@EqualsAndHashCode
 
 @Getter
 @Setter
@@ -62,47 +64,6 @@ public class Route {
 	this.airportEnd = airportEnd;
 	this.distance = distance;
 
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-	if (this == obj)
-	    return true;
-	if (obj == null)
-	    return false;
-	if (getClass() != obj.getClass())
-	    return false;
-	Route other = (Route) obj;
-	if (airportBegin == null) {
-	    if (other.airportBegin != null)
-		return false;
-	} else if (!airportBegin.equals(other.airportBegin))
-	    return false;
-	if (airportEnd == null) {
-	    if (other.airportEnd != null)
-		return false;
-	} else if (!airportEnd.equals(other.airportEnd))
-	    return false;
-	if (distance != other.distance)
-	    return false;
-	if (id != other.id)
-	    return false;
-	return true;
-    }
-
-    @Override
-    public String toString() {
-	String to = "", airportBeginString = "null", airportEndString = "null";
-
-	if (this.airportBegin != null)
-	    airportBeginString = this.airportBegin.toString();
-
-	if (this.airportEnd != null)
-	    airportEndString = this.airportEnd.toString();
-
-	to = airportBeginString + " to " + airportEndString;
-
-	return to;
     }
 
     public Route() {

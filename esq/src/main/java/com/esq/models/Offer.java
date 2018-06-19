@@ -16,12 +16,14 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Table(name = "precio")
 // @EntityListeners(AuditingEntityListener.class)
+@EqualsAndHashCode
 
 @Getter
 @Setter
@@ -62,58 +64,6 @@ public class Offer {
 	this.until = string2;
 	this.cabin = cabin;
 	this.price = price;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-	if (this == obj)
-	    return true;
-	if (obj == null)
-	    return false;
-	if (getClass() != obj.getClass())
-	    return false;
-	Offer other = (Offer) obj;
-	if (cabin == null) {
-	    if (other.cabin != null)
-		return false;
-	} else if (!cabin.equals(other.cabin))
-	    return false;
-	if (from == null) {
-	    if (other.from != null)
-		return false;
-	} else if (!from.equals(other.from))
-	    return false;
-	if (id != other.id)
-	    return false;
-	if (price != other.price)
-	    return false;
-	if (route == null) {
-	    if (other.route != null)
-		return false;
-	} else if (!route.equals(other.route))
-	    return false;
-	if (until == null) {
-	    if (other.until != null)
-		return false;
-	} else if (!until.equals(other.until))
-	    return false;
-	return true;
-    }
-
-    @Override
-    public String toString() {
-	String to = "", routeString = "null", cabinString = "null";
-
-	if (this.route != null)
-	    routeString = this.route.toString();
-
-	if (this.cabin != null)
-	    cabinString = this.cabin.toString();
-
-	to = routeString + " - Cabin: " + cabinString + " - Offer will be from: " + this.from + " to: " + this.until
-		+ " the price is: " + this.price;
-
-	return to;
     }
 
     public Offer(String from, String until, Cabin cabin, long price) {

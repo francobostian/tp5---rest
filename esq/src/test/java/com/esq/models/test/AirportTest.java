@@ -19,29 +19,12 @@ public class AirportTest extends TestCase {
     public void setUp() {
 
 	Country country = new Country(1, "Argentina", "ARG");
-	State state = new State(1, "Buenos Aires", "BA", country);
-	City city = new City(1, "Buenos Aires", "CABA", state);
+	State state = new State(1, "Buenos Aires", "BUE", country);
+	City city = new City(1, "Buenos Aires", "CABUE", state);
 
-	this.airport = new Airport(1, "Jorge Newbery", "AEP", city, (float) 23.14, (float) 108.11);
-	this.otherAirport = new Airport("Ezeiza International Airport", "EZE", city, (float) 24.22, (float) 107.58);
+	this.airport = new Airport(1, "Jorge Newbery", "AEP", city, 333, 777);
+	this.otherAirport = new Airport("Ezeiza", "EZE", city, 888, 990);
 
-    }
-
-    @Test
-    public void testToStringOK() {
-	String value = this.airport.toString();
-	assertEquals("Checking toString", value,
-		"Jorge Newbery (AEP) - Buenos Aires (CABA) - Buenos Aires (BA) - Argentina (ARG)");
-
-    }
-
-    @Test
-    public void testToStringNull() {
-	this.airport.setName(null);
-	String value = this.airport.toString();
-
-	assertEquals("Checking toString", value,
-		"null (AEP) - Buenos Aires (CABA) - Buenos Aires (BA) - Argentina (ARG)");
     }
 
     @Test

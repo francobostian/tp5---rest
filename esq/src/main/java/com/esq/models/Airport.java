@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,6 +24,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@EqualsAndHashCode
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Airport {
 
@@ -67,31 +69,6 @@ public class Airport {
 	this.city = city;
 	this.latitude = latitude;
 	this.longitude = longitude;
-    }
-
-    @Override
-    public String toString() {
-	String to = "", cityString = "null";
-
-	if (this.city != null)
-	    cityString = this.city.toString();
-
-	to = this.name + " (" + this.iataCode + ") - " + this.city.toString();
-
-	return to;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-	if (this == o)
-	    return true;
-	if (o == null || !(o instanceof Airport))
-	    return false;
-
-	Airport airport = (Airport) o;
-	return this.id == airport.getId() && this.name.equals(airport.getName())
-		&& this.iataCode.equals(airport.getIataCode()) && this.city.equals(airport.getCity())
-		&& this.latitude == airport.getLatitude() && this.longitude == airport.getLongitude();
     }
 
     public Airport() {

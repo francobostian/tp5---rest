@@ -11,12 +11,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Table(name = "pais")
 // @EntityListeners(AuditingEntityListener.class)
+@EqualsAndHashCode
 
 @Getter
 @Setter
@@ -47,38 +49,6 @@ public class Country {
 
 	this.name = name;
 	this.isoCode = isoCode;
-    }
-
-    @Override
-    public String toString() {
-	String to = "";
-	to = this.name + " (" + this.isoCode + ")";
-
-	return to;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-	if (this == obj)
-	    return true;
-	if (obj == null)
-	    return false;
-	if (getClass() != obj.getClass())
-	    return false;
-	Country other = (Country) obj;
-	if (id != other.getId())
-	    return false;
-	if (isoCode == null) {
-	    if (other.isoCode != null)
-		return false;
-	} else if (!isoCode.equals(other.isoCode))
-	    return false;
-	if (name == null) {
-	    if (other.name != null)
-		return false;
-	} else if (!name.equals(other.name))
-	    return false;
-	return true;
     }
 
     public Country() {

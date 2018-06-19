@@ -26,10 +26,10 @@ public class OfferTest extends TestCase {
     public void setUp() {
 
 	Country country = new Country(1, "Argentina", "ARG");
-	State state = new State(1, "Buenos Aires", "BA", country);
-	City city = new City(1, "Buenos Aires", "CABA", state);
-	Airport airportBegin = new Airport(1, "Jorge Newbery", "AEP", city, (float) 23.14, (float) 108.11);
-	Airport airportEnd = new Airport(2, "Ezeiza International Airport", "EZE", city, (float) 24.22, (float) 107.58);
+	State state = new State(1, "Buenos Aires", "BUE", country);
+	City city = new City(1, "Buenos Aires", "CABUE", state);
+	Airport airportBegin = new Airport(1, "Jorge Newbery", "AEP", city, 444, 666);
+	Airport airportEnd = new Airport(2, "Ezeiza", "EZE", city, 889, 543);
 	Route route = new Route(1, airportBegin, airportEnd, 50);
 	Cabin cabinA = new Cabin(1, "Business");
 	Cabin cabinB = new Cabin(2, "First Class");
@@ -40,26 +40,9 @@ public class OfferTest extends TestCase {
 	DateFormat dateFormat2 = new SimpleDateFormat("yyyy/MM/dd");
 	Date date2 = new Date();
 
-	this.offer = new Offer(route, (dateFormat.format(date)), dateFormat2.format(date2), cabinA, (long) 200.00);
-	this.otherOffer = new Offer((dateFormat.format(date)), dateFormat2.format(date2), cabinA, (long) 200.00);
+	this.offer = new Offer(route, (dateFormat.format(date)), dateFormat2.format(date2), cabinA, 123);
+	this.otherOffer = new Offer((dateFormat.format(date)), dateFormat2.format(date2), cabinA, 123);
 
-    }
-
-    @Test
-    public void testToStringOK() {
-	String value = this.offer.toString();
-	assertEquals("Checking toString", value,
-		"Jorge Newbery (AEP) - Buenos Aires (CABA) - Buenos Aires (BA) - Argentina (ARG) to Ezeiza International Airport (EZE) - Buenos Aires (CABA) - Buenos Aires (BA) - Argentina (ARG) - Cabin: Business - Offer will be from: 2018/06/08 to: 2018/06/08 the price is: 200");
-
-    }
-
-    @Test
-    public void testToStringNull() {
-	this.offer.setCabin(null);
-	String value = this.offer.toString();
-
-	assertEquals("Checking toString", value,
-		"Jorge Newbery (AEP) - Buenos Aires (CABA) - Buenos Aires (BA) - Argentina (ARG) to Ezeiza International Airport (EZE) - Buenos Aires (CABA) - Buenos Aires (BA) - Argentina (ARG) - Cabin: null - Offer will be from: 2018/06/08 to: 2018/06/08 the price is: 200");
     }
 
     @Test

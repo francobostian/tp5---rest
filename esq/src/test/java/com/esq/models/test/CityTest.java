@@ -18,24 +18,10 @@ public class CityTest extends TestCase {
     public void setUp() {
 
 	Country country = new Country(1, "Argentina", "ARG");
-	State state = new State(1, "Buenos Aires", "BA", country);
+	State state = new State(1, "Buenos Aires", "BUE", country);
 
 	this.city = new City(1, "Mar del Plata", "MDQ", state);
-	this.otherCity = new City("La Plata", "LP", state);
-    }
-
-    @Test
-    public void testToStringOK() {
-	String value = this.city.toString();
-	assertEquals("Checking toString", value, "Mar del Plata (MDQ) - Buenos Aires (BA) - Argentina (ARG)");
-    }
-
-    @Test
-    public void testToStringNull() {
-	this.city.setName(null);
-	String value = this.city.toString();
-
-	assertEquals("Checking toString", value, "null (MDQ) - Buenos Aires (BA) - Argentina (ARG)");
+	this.otherCity = new City("Ayacucho", "AYA", state);
     }
 
     @Test

@@ -14,22 +14,8 @@ public class CabinTest extends TestCase {
 
     @Before
     public void setUp() {
-	this.cabin = new Cabin(1, "Económico");
-	this.otherCabin = new Cabin(2, "VIP");
-    }
-
-    @Test
-    public void testToStringOK() {
-	String value = this.cabin.toString();
-	assertEquals("Checking toString", value, "Económico");
-    }
-
-    @Test
-    public void testToStringNull() {
-	this.cabin.setName(null);
-	String value = this.cabin.toString();
-
-	assertEquals("Checking toString", value, null);
+	this.cabin = new Cabin(1, "Economico");
+	this.otherCabin = new Cabin(2, "Bussienes");
     }
 
     @Test

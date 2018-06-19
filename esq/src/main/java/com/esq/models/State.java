@@ -17,12 +17,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Table(name = "provincia")
 @EntityListeners(AuditingEntityListener.class)
+@EqualsAndHashCode
 
 @Getter
 @Setter
@@ -59,47 +61,6 @@ public class State {
 	this.name = name;
 	this.iataCode = iataCode;
 	this.country = country;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-	if (this == obj)
-	    return true;
-	if (obj == null)
-	    return false;
-	if (getClass() != obj.getClass())
-	    return false;
-	State other = (State) obj;
-	if (country == null) {
-	    if (other.country != null)
-		return false;
-	} else if (!country.equals(other.country))
-	    return false;
-	if (iataCode == null) {
-	    if (other.iataCode != null)
-		return false;
-	} else if (!iataCode.equals(other.iataCode))
-	    return false;
-	if (id != other.id)
-	    return false;
-	if (name == null) {
-	    if (other.name != null)
-		return false;
-	} else if (!name.equals(other.name))
-	    return false;
-	return true;
-    }
-
-    @Override
-    public String toString() {
-	String to = "", countryString = "null";
-
-	if (this.country != null)
-	    countryString = this.country.toString();
-
-	to = this.name + " (" + this.iataCode + ") - " + countryString;
-
-	return to;
     }
 
     public State() {

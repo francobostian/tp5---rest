@@ -15,21 +15,7 @@ public class CountryTest extends TestCase {
     @Before
     public void setUp() {
 	this.country = new Country(1, "Argentina", "ARG");
-	this.otherCountry = new Country("Brasil", "BR");
-    }
-
-    @Test
-    public void testToStringOK() {
-	String value = this.country.toString();
-	assertEquals("Checking toString", value, "Argentina (ARG)");
-    }
-
-    @Test
-    public void testToStringNull() {
-	this.country.setName(null);
-	String value = this.country.toString();
-
-	assertEquals("Checking toString", value, "null (ARG)");
+	this.otherCountry = new Country("Uruguay", "URU");
     }
 
     @Test

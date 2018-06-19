@@ -30,22 +30,6 @@ public class RouteTest extends TestCase {
     }
 
     @Test
-    public void testToStringOK() {
-	String value = this.route.toString();
-	assertEquals("Checking toString", value,
-		"Jorge Newbery (AEP) - Buenos Aires (CABA) - Buenos Aires (BA) - Argentina (ARG) to Ezeiza International Airport (EZE) - Buenos Aires (CABA) - Buenos Aires (BA) - Argentina (ARG)");
-    }
-
-    @Test
-    public void testToStringNull() {
-	this.route.setAirportBegin(null);
-	String value = this.route.toString();
-
-	assertEquals("Checking toString", value,
-		"null to Ezeiza International Airport (EZE) - Buenos Aires (CABA) - Buenos Aires (BA) - Argentina (ARG)");
-    }
-
-    @Test
     public void testEqualsNull() {
 	boolean value = this.route.equals(null);
 	assertEquals("Checking equals", value, false);

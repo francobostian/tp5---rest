@@ -15,11 +15,13 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Table(name = "ciudad")
+@EqualsAndHashCode
 
 @Getter
 @Setter
@@ -56,30 +58,6 @@ public class City {
 	this.name = name;
 	this.iataCode = iataCode;
 	this.state = state;
-    }
-
-    @Override
-    public String toString() {
-	String to = "", stateString = "null";
-
-	if (this.state != null)
-	    stateString = this.state.toString();
-
-	to = this.name + " (" + this.iataCode + ") - " + stateString;
-
-	return to;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-	if (this == o)
-	    return true;
-	if (o == null || !(o instanceof City))
-	    return false;
-
-	City city = (City) o;
-	return this.id == city.getId() && this.name.equals(city.getName()) && this.iataCode.equals(city.getIataCode())
-		&& this.state.equals(city.getState());
     }
 
     public City() {

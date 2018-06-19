@@ -22,21 +22,6 @@ public class StateTest extends TestCase {
     }
 
     @Test
-    public void testToStringOK() {
-	String value = this.state.toString();
-	assertEquals("Checking toString", value, "Buenos Aires (BA) - Argentina (ARG)");
-
-    }
-
-    @Test
-    public void testToStringNull() {
-	this.state.setName(null);
-	String value = this.state.toString();
-
-	assertEquals("Checking toString", value, "null (BA) - Argentina (ARG)");
-    }
-
-    @Test
     public void testEqualsNull() {
 	boolean value = this.state.equals(null);
 	assertEquals("Checking equals", value, false);
