@@ -1,4 +1,4 @@
-package hello.pojo.test;
+package com.example.aeroperu.pojos.test;
 
 import static org.junit.Assert.assertEquals;
 
@@ -8,8 +8,7 @@ import org.junit.Test;
 import com.esq.models.City;
 import com.esq.models.Country;
 import com.esq.models.State;
-
-import hello.pojo.CityPojo;
+import com.example.aeroperu.pojo.CityPojo;
 
 public class CityPojoTest {
 
@@ -20,7 +19,8 @@ public class CityPojoTest {
     public void setUp() {
 
 	Country country = new Country(1, "Argentina", "ARG");
-	State state = new State(1, "Buenos Aires", "BA", country);
+	State state = new State(1, "Buenos Aires", "BUE", country);
+
 	this.city = new CityPojo(new City(1, "Mar del Plata", "7600", state));
 	this.otherCity = new CityPojo();
     }

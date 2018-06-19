@@ -1,4 +1,4 @@
-package hello.pojo.test;
+package com.example.aeroperu.pojos.test;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,8 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.esq.models.Cabin;
-
-import hello.pojo.CabinPojo;
+import com.example.aeroperu.pojo.CabinPojo;
 
 public class CabinPojoTest {
 

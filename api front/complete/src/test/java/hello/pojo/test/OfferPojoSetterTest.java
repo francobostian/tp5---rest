@@ -1,11 +1,11 @@
-package hello.pojo.test;
+package com.example.aeroperu.pojos.test;
 
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import hello.pojo.OfferPojoSetter;
+import com.example.aeroperu.pojo.OfferPojoSetter;
 
 public class OfferPojoSetterTest {
 

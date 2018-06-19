@@ -1,11 +1,11 @@
-package hello.pojo.test;
+package com.example.aeroperu.pojos.test;
 
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import hello.pojo.RoutePojoSetter;
+import com.example.aeroperu.pojo.RoutePojoSetter;
 
 public class RoutePojoSetterTest {
 
