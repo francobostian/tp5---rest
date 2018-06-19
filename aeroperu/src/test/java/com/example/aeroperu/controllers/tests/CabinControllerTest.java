@@ -85,7 +85,6 @@ public class CabinControllerTest {
     @Test
     public void updateTest() {
 
-	ResponseEntity status = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 	Cabin getCab = new Cabin(1, "Economica");
 
 	assertNotNull(this.cabin);

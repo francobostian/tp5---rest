@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +33,7 @@ public class CabinServiceTest {
     }
 
     @Test
-    public void getALlTest() throws Exception {
+    public void getALlTest() {
 	List<Cabin> listCabin = new ArrayList<Cabin>();
 	listCabin.add(this.cabin);
 	listCabin.add(this.cabin);
@@ -43,7 +44,7 @@ public class CabinServiceTest {
     }
 
     @Test
-    public void addTest() throws Exception {
+    public void addTest() {
 	Mockito.when(this.cabinRepository.save(this.cabin)).thenReturn(this.cabin);
 	Cabin cab = this.service.newObject(this.cabin);
 	assertEquals(1, cab.getId());
@@ -52,15 +53,14 @@ public class CabinServiceTest {
     }
 
     @Test
-    public void removeTest() throws Exception {
+    public void removeTest() {
 	service.removeObject(this.cabin.getId());
 	Mockito.verify(this.cabinRepository, Mockito.times(1)).deleteById(this.cabin.getId());
     }
 
     @Test
-    public void getByIdTest() throws Exception {
-	Mockito.when(this.cabinRepository.findById(this.cabin.getId()))
-		.thenReturn(java.util.Optional.ofNullable(this.cabin));
+    public void getByIdTest() {
+	Mockito.when(this.cabinRepository.findById(this.cabin.getId())).thenReturn(Optional.ofNullable(this.cabin));
 	Cabin cab = this.service.getById(this.cabin.getId());
 	assertEquals(1, cab.getId());
 	assertEquals("Economica", cab.getName());
@@ -68,7 +68,7 @@ public class CabinServiceTest {
     }
 
     @Test
-    public void getByAttributeTypeTest() throws Exception {
+    public void getByAttributeTypeTest() {
 	Mockito.when(this.cabinRepository.getAttribute(this.cabin.getName())).thenReturn(this.cabin);
 	Cabin cab = this.service.getByAttributeType(this.cabin.getName());
 	assertEquals(1, cab.getId());

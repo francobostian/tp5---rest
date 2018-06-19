@@ -19,10 +19,6 @@ public class RouteService {
 	return this.routeRepository.findAll();
     }
 
-    // public Route getByAttributeType(String id) {
-    // return null;
-    // }
-
     public Route getById(Long id) {
 	Route route = null;
 	Optional<Route> routeOptional = this.routeRepository.findById(id);
@@ -43,23 +39,5 @@ public class RouteService {
     public void removeObject(Long id) {
 	this.routeRepository.deleteById(id);
     }
-
-    // public Route getByAttributeTypeRoute(String iataAirportBegin, String
-    // iataAirportEnd) {
-    // Route route = null;
-    // Optional<Route> routeOptional =
-    // this.routeRepository.getAttributeByAirports(iataAirportBegin,
-    // iataAirportEnd);
-    //
-    // if (routeOptional.isPresent()) {
-    // route = routeOptional.get();
-    // }
-    //
-    // return route;
-    // }
-    //
-    // public List<Route> getByInitAirport(String iata) throws Exception {
-    // return this.routeRepository.getByInitAirport(iata);
-    // }
 
 }

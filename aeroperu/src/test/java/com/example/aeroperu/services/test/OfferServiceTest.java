@@ -70,15 +70,8 @@ public class OfferServiceTest {
 	assertEquals(this.cabin, offer.getCabin());
 
 	assertEquals(2000, offer.getPrice());
-	// assertEquals(1, offer.getId());
 
     }
-
-    // @Test
-    // public void getByAttributeTypeTest() throws Exception {
-    // Route rte = this.service.getByAttributeType("hola");
-    // assertNull(rte);
-    // }
 
     @Test
     public void removeTest() throws Exception {

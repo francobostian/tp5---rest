@@ -32,8 +32,8 @@ public class AirportServiceTest {
 
     Country ct = new Country(1, "Argentina", "ARG");
     State st = new State(1, "state", "ARG", ct);
-    City city = new City(1, "Buenos Aires", "BS", st);
-    Airport airport = new Airport(1, "AreolineasArgentinas", "ARG", city, -222, 222);
+    City city = new City(1, "Buenos Aires", "BUE", st);
+    Airport airport = new Airport(1, "San Martin", "ARG", city, 333, 444);
 
     @Before
     public void setUp() {
@@ -56,11 +56,11 @@ public class AirportServiceTest {
 	Mockito.when(this.airportRepository.save(this.airport)).thenReturn(this.airport);
 	Airport air = this.service.newObject(this.airport);
 	assertEquals(1, air.getId());
-	assertEquals("AreolineasArgentinas", air.getName());
+	assertEquals("San Martin", air.getName());
 	assertEquals("ARG", air.getIataCode());
 	assertEquals(city, air.getCity());
-	assertEquals(-222, air.getLatitude(), 0);
-	assertEquals(222, air.getLongitude(), 0);
+	assertEquals(333, air.getLatitude(), 0);
+	assertEquals(444, air.getLongitude(), 0);
     }
 
     @Test
@@ -75,11 +75,11 @@ public class AirportServiceTest {
 		.thenReturn(java.util.Optional.ofNullable(this.airport));
 	Airport air = this.service.getById(this.airport.getId());
 	assertEquals(1, air.getId());
-	assertEquals("AreolineasArgentinas", air.getName());
+	assertEquals("San Martin", air.getName());
 	assertEquals("ARG", air.getIataCode());
 	assertEquals(city, air.getCity());
-	assertEquals(-222, air.getLatitude(), 0);
-	assertEquals(222, air.getLongitude(), 0);
+	assertEquals(333, air.getLatitude(), 0);
+	assertEquals(444, air.getLongitude(), 0);
     }
 
     @Test
@@ -87,11 +87,11 @@ public class AirportServiceTest {
 	Mockito.when(this.airportRepository.getAttribute(this.airport.getIataCode())).thenReturn(this.airport);
 	Airport air = this.service.getByAttributeType(this.airport.getIataCode());
 	assertEquals(1, air.getId());
-	assertEquals("AreolineasArgentinas", air.getName());
+	assertEquals("San Martin", air.getName());
 	assertEquals("ARG", air.getIataCode());
 	assertEquals(city, air.getCity());
-	assertEquals(-222, air.getLatitude(), 0);
-	assertEquals(222, air.getLongitude(), 0);
+	assertEquals(333, air.getLatitude(), 0);
+	assertEquals(444, air.getLongitude(), 0);
     }
 
 }

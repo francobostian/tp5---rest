@@ -28,39 +28,12 @@ public class CityServiceTest {
 
     Country ct = new Country(1, "Argentina", "ARG");
     State st = new State(1, "state", "ARG", ct);
-    City city = new City(1, "Buenos Aires", "BS", st);
+    City city = new City(1, "Buenos Aires", "BUE", st);
 
     @Before
     public void setUp() {
 	MockitoAnnotations.initMocks(this);
     }
-
-    // @Test
-    // public void addTest() throws Exception {
-    // when(this.cityRepository.save(this.city)).thenReturn(this.city);
-    // City cit = this.service.newObject(this.city);
-    // assertEquals(1, cit.getId());
-    // assertEquals("Buenos Aires", cit.getName());
-    // assertEquals("BS", cit.getIataCode());
-    // assertEquals(this.st, cit.getState());
-    //
-    // }
-    //
-    // @Test
-    // public void removeTest() throws Exception {
-    // service.removeObject(this.city.getId());
-    // verify(this.cityRepository, times(1)).deleteById(this.city.getId());
-    // }
-
-    // @Test
-    // public void getByIdTest() throws Exception {
-    // when(this.cityRepository.findById(this.city.getId())).thenReturn(java.util.Optional.ofNullable(this.city));
-    // City cit = this.service.getById(this.city.getId());
-    // assertEquals(1, cit.getId());
-    // assertEquals("Buenos Aires", cit.getName());
-    // assertEquals("BS", cit.getIataCode());
-    // assertEquals(this.st, cit.getState());
-    // }
 
     @Test
     public void getByAttributeTypeTest() throws Exception {
@@ -68,7 +41,7 @@ public class CityServiceTest {
 	City cit = this.service.getByAttributeType(this.city.getIataCode());
 	assertEquals(1, cit.getId());
 	assertEquals("Buenos Aires", cit.getName());
-	assertEquals("BS", cit.getIataCode());
+	assertEquals("BUE", cit.getIataCode());
 	assertEquals(this.st, cit.getState());
     }
 }

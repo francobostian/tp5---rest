@@ -19,10 +19,6 @@ public class OfferService {
 	return this.offer.findAll();
     }
 
-    // public Offer getByAttributeType(String value) {
-    // return this.offer.getAttribute(value);
-    // }
-
     public Offer getById(Long id) {
 	Offer offer = null;
 	Optional<Offer> offerOptional = this.offer.findById(id);

@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,9 +37,9 @@ public class RouteServiceTest {
     Country ct = new Country(1, "Argentina", "ARG");
     State st = new State(1, "state", "ARG", ct);
     City city = new City(1, "Buenos Aires", "BS", st);
-    City city2 = new City(1, "Rosario", "R", st);
-    Airport airportBegin = new Airport(1, "AreolineasArgentinas", "ARG", city, -222, 222);
-    Airport airportEnd = new Airport(2, "MDP", "MDP", city2, -222, 222);
+    City city2 = new City(1, "Cordoba", "R", st);
+    Airport airportBegin = new Airport(1, "Guemes", "ARG", city, -789, 789);
+    Airport airportEnd = new Airport(2, "MDP", "MDP", city2, -789, 789);
     Route rt = new Route(1, airportBegin, airportEnd, 100);
 
     @Before
@@ -69,12 +70,6 @@ public class RouteServiceTest {
 
     }
 
-    // @Test
-    // public void getByAttributeTypeTest() throws Exception {
-    // Route rte = this.service.getByAttributeType("hola");
-    // assertNull(rte);
-    // }
-
     @Test
     public void removeTest() throws Exception {
 	service.removeObject(this.ct.getId());
@@ -83,7 +78,7 @@ public class RouteServiceTest {
 
     @Test
     public void getByIdTest() throws Exception {
-	when(this.routeRepository.findById(this.rt.getId())).thenReturn(java.util.Optional.ofNullable(this.rt));
+	when(this.routeRepository.findById(this.rt.getId())).thenReturn(Optional.ofNullable(this.rt));
 	Route rte = this.service.getById(this.rt.getId());
 	assertEquals(this.airportEnd, rte.getAirportEnd());
 	assertEquals(this.airportBegin, rte.getAirportBegin());
@@ -92,17 +87,4 @@ public class RouteServiceTest {
 	assertEquals(1, rte.getId());
     }
 
-    // @Test
-    // public void getByAttributeTypeRoute() throws Exception {
-    // when(this.routeRepository.getAttributeByAirports(this.airportBegin.getIataCode(),
-    // this.airportEnd.getIataCode())).thenReturn(java.util.Optional.ofNullable(this.rt));
-    // Route rte =
-    // this.service.getByAttributeTypeRoute(this.airportBegin.getIataCode(),
-    // this.airportEnd.getIataCode());
-    // assertEquals(this.airportEnd, rte.getAirportEnd());
-    // assertEquals(this.airportBegin, rte.getAirportBegin());
-    // assertEquals(1, rte.getEstimatedTime());
-    // assertEquals(100, rte.getDistance());
-    // assertEquals(1, rte.getId());
-    // }
 }
